@@ -1,0 +1,243 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using XnaFan.ImageComparison;
+using System.Net;
+using System.IO;
+using System.Drawing.Imaging;
+using System.Diagnostics;
+using System.Threading;
+
+
+
+namespace comprator
+{
+    public partial class speed : Form
+    {
+        public speed()
+        {
+            InitializeComponent();
+        }
+        int flag = 0;
+        string path2, path,url,path1;
+        private void button1_Click(object sender, EventArgs e)
+
+        {
+            flag = 0;
+            label6.Text ="";
+            button2.Visible = true;
+            if (radioButton1.Checked == true)
+            {
+                try
+                {
+                    if (textBox1.Text == "" || textBox2.Text == "")
+                    {
+                        pictureBox1.Image = null;
+                        pictureBox2.Image = null;
+                        progressBar1.Value = 0;
+                        label1.Text = "";
+                        label1.Text = "Enter Url";
+
+
+                    }
+                    else
+                    {
+                        int difference = (int)(ImageTool.GetPercentageDifference(textBox1.Text, textBox2.Text) * 100);
+                        int sim = 100 - difference;
+                        pictureBox1.ImageLocation = textBox1.Text;
+                        pictureBox2.ImageLocation = textBox2.Text;
+                        label1.Text = sim.ToString() + "%similar";
+                        progressBar1.Value = sim;
+
+                    }
+                }
+                catch (Exception ec)
+                {
+                    label6.Text = ec.Message;
+
+                }
+            }
+
+            if (radioButton2.Checked == true)
+            {
+                label7.Text = "Loading Images......";
+                try
+                {
+
+
+                    if (textBox1.Text == "" || textBox2.Text == "")
+                    {
+
+                        pictureBox1.Image = null;
+                        pictureBox2.Image = null;
+                        progressBar1.Value = 0;
+                        label1.Text = "";
+                        label1.Text = "Enter Url";
+                    }
+                    else
+                    {
+                        string last = (textBox1.Text).Split(new char[] { '/' }).Last();
+                        string ex = last.Split(new char[] { '.' }).Last();
+                        //label1.Text = ex;
+                        path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "f1." + ex);
+                        path1 = path;
+                        url = textBox1.Text;
+                       // DownloadFile(textBox1.Text, path);
+                          thrDownload = new Thread(Download);
+            // Start the thread, and thus call Download()
+            thrDownload.Start();
+
+                    }
+                }
+                catch (Exception eb)
+                {
+                    label6.Text = eb.Message;
+                }
+            }
+        }
+        void get()
+        {
+            string last = (textBox2.Text).Split(new char[] { '/' }).Last();
+            string ex = last.Split(new char[] { '.' }).Last();
+            //label1.Text = ex;
+            path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "f2." + ex);
+            path2 = path;
+            url = textBox2.Text;
+            thrDownload2 = new Thread(Download);
+            // Start the thread, and thus call Download()
+            thrDownload2.Start();
+            flag = 1;
+
+        
+        }
+
+
+        // The thread inside which the download happens
+        private Thread thrDownload;
+        private Thread thrDownload2;
+        // The stream of data retrieved from the web server
+        private Stream strResponse;
+        // The stream of data that we write to the harddrive
+        private Stream strLocal;
+        // The request to the web server for file information
+        private HttpWebRequest webRequest;
+        // The response from the web server containing information about the file
+        private HttpWebResponse webResponse;
+        // The progress of the download in percentage
+        private static int PercentProgress;
+        // The delegate which we will call from the thread to update the form
+        private delegate void UpdateProgessCallback(Int64 BytesRead, Int64 TotalBytes);
+
+      
+
+        private void btnDownload_Click(object sender, EventArgs e)
+        {
+            // Let the user know we are connecting to the server
+         //   lblProgress.Text = "Download Starting";
+            // Create a new thread that calls the Download() method
+            thrDownload = new Thread(Download);
+            // Start the thread, and thus call Download()
+            thrDownload.Start();
+        }
+
+        private void UpdateProgress(Int64 BytesRead, Int64 TotalBytes)
+        {
+            // Calculate the download progress in percentages
+            PercentProgress = Convert.ToInt32((BytesRead * 100) / TotalBytes);
+            // Make progress on the progress bar
+            progressBar1.Value = PercentProgress;
+            // Display the current progress on the form
+            label10.Text = "Downloaded " + BytesRead + " out of " + TotalBytes + " (" + PercentProgress + "%)";
+            if (progressBar1.Value == 100)
+            {
+                //label1.Text = sim.ToString() + "% Similar";
+                progressBar1.Value = 0;
+                if (flag == 0)
+                {
+                    get();
+                }
+               
+              
+            }
+
+        }
+
+        private void Download()
+        {
+            using (WebClient wcDownload = new WebClient())
+            {
+                try
+                {
+                    // Create a request to the file we are downloading
+                    webRequest = (HttpWebRequest)WebRequest.Create(url);
+                    // Set default authentication for retrieving the file
+                    webRequest.Credentials = CredentialCache.DefaultCredentials;
+                    // Retrieve the response from the server
+                    webResponse = (HttpWebResponse)webRequest.GetResponse();
+                    // Ask the server for the file size and store it
+                    Int64 fileSize = webResponse.ContentLength;
+                    
+                    // Open the URL for download 
+                    strResponse = wcDownload.OpenRead(url);
+                    // Create a new file stream where we will be saving the data (local drive)
+                    strLocal = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
+                    
+                    // It will store the current number of bytes we retrieved from the server
+                    int bytesSize = 0;
+                    // A buffer for storing and writing the data retrieved from the server
+                    byte[] downBuffer = new byte[2048];
+
+                    // Loop through the buffer until the buffer is empty
+                    while ((bytesSize = strResponse.Read(downBuffer, 0, downBuffer.Length)) > 0)
+                    {
+                        // Write the data from the buffer to the local hard drive
+                        strLocal.Write(downBuffer, 0, bytesSize);
+                        // Invoke the method that updates the form's label and progress bar
+                        this.Invoke(new UpdateProgessCallback(this.UpdateProgress), new object[] { strLocal.Length, fileSize });
+                    }
+                   // thrDownload2.Abort();
+                }
+                finally
+                {
+                    // When the above code has ended, close the streams
+                    strResponse.Close();
+                    strLocal.Close();
+                    webResponse.Close();
+                   //thrDownload.Abort();
+                  //thrDownload2.Abort();
+                  
+        
+                    
+                }
+            }
+        }
+
+
+
+        private void txtUrl_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+           button2.Visible = false;
+            if (flag == 1)
+            {
+                int difference = (int)(ImageTool.GetPercentageDifference(path1, path2) * 100);
+                int sim = 100 - difference;
+                label7.Text = "";
+                pictureBox1.ImageLocation = path1;
+                pictureBox2.ImageLocation = path2;
+                label1.Text = sim.ToString() + "% Similar";
+                progressBar1.Value = sim;
+            }
+        }
+    }
+}
+

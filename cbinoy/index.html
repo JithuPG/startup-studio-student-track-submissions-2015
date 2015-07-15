@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Compare Images</title>
+
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+
+
+<body>
+
+	<div id="page-wrap">		
+		<div style="  width: 100%;text-align: center;font-size: 23px;color: #FF10C3;">Image Comparison</div>
+		<div id="contact-area">
+			<form   >
+				<label for="Name">Image #1:</label>
+				<input type="text" name="title"  size="90" id="image1" placeholder="Enter the Image url #1" value="https://www.google.co.in/images/srpr/logo11w.png"></input>
+				<label for="Name">Image #2:</label>
+				<input type="text" name="title"  size="90" id="image2" placeholder="Enter the Image url #2" value="https://www.google.co.in/images/srpr/logo11w.png"></input>
+				<input type="button" onclick="compare()" name="submit" value="Compare" class="submit-button" />
+			</form>
+			
+			
+			
+			<div style="clear: both;"></div>
+			<img src="./images/loading.gif" id="loading"></img>
+			<img src="" class="imageDisplay" id="imageDisplayfirst"></img>
+			<img src="" class="imageDisplay" id="imageDisplaysecond"></img>
+			
+			<div>
+				<div id="percentage">
+					<div id="match">
+						<span id="percentageCount">50</span>
+					</div>
+				</div>
+				<div class="leftpane">
+					<div id="greenMatch">
+						<span class="green"></span>
+						<span class="greenText">Match Percentage</span>
+					</div>
+				</div>
+				
+				<div class="scale">Similarity Scale</div>
+				
+				<div class="rightpane" >
+					<div id="redMatch">
+						<span class="red"></span>
+						<span class="redText">Mismatch Percentage</span>
+					</div>
+				
+				</div>
+			
+			</div>
+
+		</div>
+	</div>
+</body>
+<script src="js/resemble.js"></script>
+<script>
+
+/*ajax request is used to fech the data url from the image.cross-origin issues are overrided by using ajax and php*/
+function compare()	{
+			document.getElementById("loading").style.display="block";
+			var firstImage=document.getElementById("image1").value;
+			var secondImage=document.getElementById("image2").value;
+			
+			var xmlhttp;
+			if (window.XMLHttpRequest)
+			{// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+			}
+			else
+			{// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange=function()
+			{
+			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+			{
+			 var parsedData = JSON.parse(xmlhttp.responseText);
+
+			var first = parsedData.image1,
+				second = parsedData.image2;
+			//remove loading icon
+			document.getElementById("loading").style.display="none";
+			var img = document.getElementById("imageDisplayfirst");
+			img.setAttribute("width", "304");
+			img.setAttribute("width", "228");
+			img.setAttribute("src", first);
+			
+			//second image1
+			
+			var imgSecond = document.getElementById("imageDisplaysecond");
+			imgSecond.setAttribute("width", "304");
+			imgSecond.setAttribute("width", "228");
+			imgSecond.setAttribute("src", second);
+			
+			//set border
+			document.getElementById("imageDisplayfirst").style.visibility="visible";
+			document.getElementById("imageDisplaysecond").style.visibility="visible";
+			
+			//converting dataURI to Blob
+			var blo=dataURLtoBlob(first);
+			
+			var blo1=dataURLtoBlob(second);
+
+			/* resemble.js is used to compare the image. Percentage mismatch is returned back */
+			var resemdata=resemble(blo).compareTo(blo1).onComplete(function(data){
+			
+			var mismatch=data.misMatchPercentage;
+			var match=100-mismatch;
+			match=parseInt(match);
+			
+			document.getElementById("match").style.width=match+"%";
+			document.getElementById("percentageCount").innerHTML=match;
+			return data;
+				
+			});
+			
+			}
+			};
+			/* getDataURL is given with this project */
+			xmlhttp.open("POST","http://adishankarabootcamp.org/bin/getDataURI.php",true);
+			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			xmlhttp.send("imageUrl1="+firstImage+"&imageUrl2="+secondImage);
+
+		}
+		/* Function to convert dataURL to Blob*/
+		function dataURLtoBlob(dataurl) {
+			var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+				bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+			while(n--){
+				u8arr[n] = bstr.charCodeAt(n);
+			}
+			return new Blob([u8arr], {type:mime});
+		}
+</script>
+
+
+
+</html>
+
+
+				

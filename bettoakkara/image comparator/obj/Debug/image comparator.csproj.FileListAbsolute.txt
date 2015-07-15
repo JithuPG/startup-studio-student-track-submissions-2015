@@ -1,0 +1,9 @@
+c:\users\owner\documents\visual studio 2012\Projects\image comparator\image comparator\bin\Debug\image comparator.exe.config
+c:\users\owner\documents\visual studio 2012\Projects\image comparator\image comparator\bin\Debug\image comparator.exe
+c:\users\owner\documents\visual studio 2012\Projects\image comparator\image comparator\bin\Debug\image comparator.pdb
+c:\users\owner\documents\visual studio 2012\Projects\image comparator\image comparator\obj\Debug\image comparator.csprojResolveAssemblyReference.cache
+c:\users\owner\documents\visual studio 2012\Projects\image comparator\image comparator\obj\Debug\image_comparator.Form1.resources
+c:\users\owner\documents\visual studio 2012\Projects\image comparator\image comparator\obj\Debug\image_comparator.Properties.Resources.resources
+c:\users\owner\documents\visual studio 2012\Projects\image comparator\image comparator\obj\Debug\image comparator.csproj.GenerateResource.Cache
+c:\users\owner\documents\visual studio 2012\Projects\image comparator\image comparator\obj\Debug\image comparator.exe
+c:\users\owner\documents\visual studio 2012\Projects\image comparator\image comparator\obj\Debug\image comparator.pdb

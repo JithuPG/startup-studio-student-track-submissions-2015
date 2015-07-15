@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>StartupBox : Task #01</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="assets/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/resemble-v1.css">		
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<div class="page-header">
+					<h1>Image Comparison</h1>
+				</div>
+			</header>
+	
+			<section role="main">
+				<div class="row">
+					<div class="span12">
+						<div class="row">
+							<div class="span6">
+								<div id="dropzone1" class="small-drop-zone">
+									Drop first image
+								</div>
+								<div id="dropzone2" class="small-drop-zone">
+									Drop second image
+								</div>
+							</div>
+							<div class="span6">
+								<h2>Compare two images!</h2>
+								<p>
+									Drop two images on the boxes to the left.
+								</p>
+								<br/>
+
+								<br/>
+								<br/>
+
+
+								<br/>
+								<br/>
+
+
+								<br/>
+								<br/>
+
+
+								<br/>
+								<br/>
+								<div id="diff-results" style="display:none;">
+									<p>
+										<strong>The images have a Similarity Scale of <span id="mismatch"></span>										<span id="differentdimensions" style="display:none;">(Different image sizes detected!)</span></strong>
+									</p>
+								</div>
+								
+								<p id="thesame" style="display:none;">
+									<strong>Similarity Scale 100 !</strong>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br/><br/>
+				
+			</section>
+	  
+			<footer class="footer">
+				<p align="center">Codesap Technologies 2015 &copy</p>
+			</footer>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="assets/resemble.js"></script>
+		<script src="assets/main.js"></script>
+	</body>
+</html>

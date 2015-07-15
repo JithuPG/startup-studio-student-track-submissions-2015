@@ -1,0 +1,27 @@
+{
+  "name": "",
+  "main": "",
+  "version": "1.3.0",
+  "homepage": "",
+  "authors": [
+    ""
+  ],
+  "description": "Image analysis and comparison with HTML5",
+  "keywords": [
+    "comparison",
+    "compare",
+    "visual",
+    "diff",
+    "html5",
+    "image"
+  ],
+  "license": "",
+  "ignore": [
+    "demoassets",
+    "libs",
+    "index.html",
+    ".npmignore",
+    "package.json",
+    "README.md"
+  ]
+}

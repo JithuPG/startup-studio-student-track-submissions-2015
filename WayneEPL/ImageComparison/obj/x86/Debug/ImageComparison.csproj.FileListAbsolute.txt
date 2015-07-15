@@ -1,0 +1,5 @@
+H:\Fintech\ImageComparisonSolution_1.6\ImageComparison\ImageComparison\bin\Debug\XnaFan.ImageComparison.dll
+H:\Fintech\ImageComparisonSolution_1.6\ImageComparison\ImageComparison\bin\Debug\XnaFan.ImageComparison.pdb
+H:\Fintech\ImageComparisonSolution_1.6\ImageComparison\ImageComparison\obj\x86\Debug\ImageComparison.csprojResolveAssemblyReference.cache
+H:\Fintech\ImageComparisonSolution_1.6\ImageComparison\ImageComparison\obj\x86\Debug\XnaFan.ImageComparison.dll
+H:\Fintech\ImageComparisonSolution_1.6\ImageComparison\ImageComparison\obj\x86\Debug\XnaFan.ImageComparison.pdb

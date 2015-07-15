@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>icompare</title>
+
+    <link href="{{ url_for('static', filename='css/paper.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/ripples.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/material-fullpalette.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/roboto.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+     <script>
+      function a1() {
+         document.getElementById('im_field1').src = document.getElementById('mycanvas1').value;
+      }
+
+      function a2() {
+        document.getElementById('im_field2').src = document.getElementById('mycanvas2').value;
+      }
+
+    </script>
+  </head>
+  <body class="body-material-light-grey">
+
+    <!-- Fixed navbar -->
+    {% include 'navbar.html' %}
+    <div class="jumbotron">
+    <div class="container">  
+      <form id="form"  role="form" method="post">   
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                  <input type="text" class="form-control" id="mycanvas1" name="image1" onchange='a1()' placeholder="Link of first Image" {{('value="%s"' %oldform['image1'])|safe if retry}} required>
+              </div>   
+            </div>
+          </div> 
+          <div class="row">
+            <div class="col-sm-6 col-md-4" id="append1">
+              <img src={{image1}} id="im_field1" height="300" width="350">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="form-group">
+                  <input type="text" class="form-control" id="mycanvas2" name="image2" onchange='a2()' placeholder="Link of second Image" {{('value="%s"' %oldform['image2'])|safe if retry}} required>
+              </div>   
+            </div> 
+          </div> 
+          <div class="row">
+            <div class="col-sm-6 col-md-4">
+              <img src={{image2}} id="im_field2" height="300" width="350">
+            </div>
+          </div>
+        </div>
+        <center>
+        <div class="col-md-4">
+          <button type="submit" class="btn btn-primary btn-flat">COMPARE</button><br/><br/>
+            <div class="container">
+              <center>
+                {% if sim == "Excatly Similar": %}
+                  <div class="label label-lg label-success">{{sim}}</div><br/><br/>
+                {% elif sim == "Almost Similar": %}
+                  <div class="label label-lg label-material-light-green">{{sim}}</div><br/><br/>
+                {% elif sim == "Not much similar": %}
+                  <div class="label label-lg label-material-orange">{{sim}}</div><br/><br/>
+                {% else: %}
+                  <div class="label label-lg label-material-red">{{sim}}</div><br/><br/>
+                {% endif %}
+                <div class="panel panel-success" id="diff-results" >
+                  <div class="panel panel-heading">Percent Of Similarity</div>
+                  <div class="panel panel-body">{{percent}}<span id="mismatch"></span></div>
+                </div>
+              </center>
+           </div>
+        </div>
+        </center> 
+      </form>
+    </div>
+    </div><br/>
+    <footer class="footer-material-grey">
+      <div class="container">
+        <center><strong><p style="color:black;">icompare</p></strong></center>
+      </div>
+    </footer>
+   
+
+    
+    <script src="{{ url_for('static', filename='js/material.min.js.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>    
+    <script src="{{ url_for('static', filename='js/ripples.js')}}"></script>
+
+    
+  </body>
+</html>

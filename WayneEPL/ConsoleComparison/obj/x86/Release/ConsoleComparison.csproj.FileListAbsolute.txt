@@ -1,0 +1,7 @@
+H:\Fintech\ImageComparisonSolution_1.6\ImageComparison\ConsoleComparison\bin\Release\ConsoleImageComparison.exe
+H:\Fintech\ImageComparisonSolution_1.6\ImageComparison\ConsoleComparison\bin\Release\ConsoleImageComparison.pdb
+H:\Fintech\ImageComparisonSolution_1.6\ImageComparison\ConsoleComparison\bin\Release\XnaFan.ImageComparison.dll
+H:\Fintech\ImageComparisonSolution_1.6\ImageComparison\ConsoleComparison\bin\Release\XnaFan.ImageComparison.pdb
+H:\Fintech\ImageComparisonSolution_1.6\ImageComparison\ConsoleComparison\obj\x86\Release\ConsoleImageComparison.exe
+H:\Fintech\ImageComparisonSolution_1.6\ImageComparison\ConsoleComparison\obj\x86\Release\ConsoleImageComparison.pdb
+H:\Fintech\ImageComparisonSolution_1.6\ImageComparison\ConsoleComparison\obj\x86\Release\ConsoleComparison.csprojResolveAssemblyReference.cache

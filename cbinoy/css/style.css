@@ -1,0 +1,165 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-size: 62.5%;
+	font-family: Helvetica, sans-serif;
+	background: url(../images/stripe.png) repeat;
+}
+
+p {
+	font-size: 1.3em;
+	margin-bottom: 15px;
+}
+
+#page-wrap {
+	width: 860px;
+	background: white;
+	padding: 20px 50px 20px 50px;
+	margin: 50px auto;
+	min-height: 500px;
+	height: auto !important;
+	height: 500px;
+}
+
+#contact-area {
+	width: 800px;
+	margin-top: 25px;
+}
+
+#contact-area input, #contact-area textarea {
+	padding: 5px;
+	width: 671px;
+	font-family: Helvetica, sans-serif;
+	font-size: 1.4em;
+	margin: 0px 0px 10px 0px;
+	border: 2px solid #ccc;
+}
+
+#contact-area textarea {
+	height: 50px;
+}
+
+#contact-area textarea:focus, #contact-area input:focus {
+	border: 2px solid #900;
+}
+
+#contact-area input.submit-button {
+	width: 100px;
+	float: right;
+}
+
+label {
+	float: left;
+	text-align: right;
+	margin-right: 15px;
+	width: 100px;
+	padding-top: 5px;
+	font-size: 1.4em;
+}
+
+.imageDisplay {
+	border :1px solid #ECE0E0	;
+  height: 222px;
+  margin-left: 35px;
+  width: 359px;
+  margin-top: 14px;
+  visibility:hidden;
+}
+
+#percentage	{
+
+  border: 1px solid;
+  width: 100%;
+  height: 39px;
+  background-color: #F73B83;
+    margin-top: 15px;
+}
+
+#match	{
+  background-color: #17F04B;
+  width: 50%;
+  height: 100%;
+
+}
+
+#greenMatch	{
+height: 36px;
+  width: 168px;
+ 
+}
+
+.green{
+  width: 20px;
+  height: 20px;
+  background-color: #17F04B;
+  float: left;
+  margin-top: -3px;
+  margin-right: 10px;
+}
+
+.greenText	{
+  margin-top: 16px;
+  display: block;
+  font-size: 14px;
+
+}
+
+.leftpane	{
+float:left;
+}
+
+.rightpane	{
+float:right;
+}
+
+
+#redMatch	{
+height: 36px;
+  width: 168px;
+ 
+}
+
+.red{
+   width: 20px;
+  height: 20px;
+  background-color: #F73B83;
+  float: right;
+  margin-top: -3px;
+  margin-right: 10px;
+}
+
+.redText	{
+  margin-top: 16px;
+  display: block;
+  font-size: 14px;
+      margin-left: -6px;
+
+}
+
+#percentageCount	{
+    height: 100%;
+  width: 54px;
+  font-size: 32px;
+  float: right;
+  display: block;
+
+}
+
+.scale	{
+  float: left;
+  height: 100%;
+  width: 156px;
+  /* border: 1px solid; */
+  margin-top: 14px;
+  font-size: 19px;
+  font-weight: bold;
+  margin-left: 155px;
+}
+
+#loading	{
+  margin-left: 321px;
+  display:none;
+}
