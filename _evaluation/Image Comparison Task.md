@@ -16,6 +16,7 @@ Using three criteria:
 * How does it report exactly similar images?
 * How does it report slight dissimilarity?
 * How does it report cropped images?
+
 # Quality
 * Does the repository have a sensible name?
 * Is the code readable?
@@ -24,6 +25,7 @@ Using three criteria:
 * Does the project have an automatic dependency installing mechanism?
 * Does the repo have build artifacts?
 * Are there examples for how to use it?
+
 # UX
 * Does the program handle different image formats?
 * Is there a way to input URLs?
